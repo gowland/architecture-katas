@@ -1,0 +1,26 @@
+@startuml
+title I Can Haz Cheezborger Business Context
+
+:User: as user
+
+[I Can Haz Cheezborger] as core #eeee99
+
+cloud {
+[YouTube] as youtube
+[TikTok] as tiktok
+[external images] as internet
+
+database "Azure storage" as azure
+[Disqus] as disqus
+}
+
+user -.-> core : uses
+
+core -.-> youtube : reads
+core -.-> tiktok : reads
+core -.-> internet : reads
+
+core <-.-> azure : read/write content
+core <-.-> disqus : read/write content
+
+@enduml

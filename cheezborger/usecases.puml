@@ -1,0 +1,121 @@
+@startuml
+title I Can Haz Cheezborger Use Cases
+left to right direction
+
+package "Users" {
+    :Reader: as reader
+    :Poster: as poster
+    :User Moderator: as mod
+}
+
+' Readers
+
+(Log in) as login
+
+package "Readers" {
+    (View meme page) as readPage
+    (Search for meme) as searchPage
+    (Flag whole page) as flagPage
+    (Flag page content element) as flagContent
+    (Read forums) as readForums
+}
+
+reader --> readPage
+reader --> searchPage
+reader --> flagPage
+reader --> flagContent
+reader --> readForums
+
+flagPage --> login
+flagContent --> login
+readForums --> login
+
+' Posters
+
+note right of poster
+    Poster can perform all actions of Reader
+end note
+
+package "Posters" {
+    package "Forums" {
+        (Start new forum thread) as startThread
+        (Reply to forum thread) as replyThread
+    }
+    package "New Content" {
+        (Post new content to page) as postContent
+        (Create new meme page) as createPage
+        (Inject online image) as image
+        postContent --> image
+        (Inject TikTok video) as tiktok
+        postContent --> tiktok
+        (Inject YouTube video) as youtube
+        postContent --> youtube
+    }
+    package "Mashup" {
+        (Post mashup to page) as createMashupPage
+        (Merge images) as mashupImages
+        (Merge videos) as mashupVideos
+        (Merge image and video) as mashupImageVideo
+        createMashupPage --> mashupImages
+        createMashupPage --> mashupVideos
+        createMashupPage --> mashupImageVideo
+        (Select pages for mashup) as selectPages
+    }
+    (Edit page tags) as editTags
+}
+
+poster --> postContent
+poster --> createPage
+poster --> createMashupPage
+createMashupPage --> selectPages
+poster --> editTags
+poster --> startThread
+poster --> replyThread
+
+postContent --> login
+createPage --> login
+createMashupPage --> login
+editTags --> login
+startThread --> login
+replyThread --> login
+
+' Moderators
+
+note right of mod
+    User Moderator can perform all actions of Poster and User
+end note
+
+package "Moderators" {
+    (Reject flagged page) as rejectPage
+    (Reject flagged content) as rejectContent
+}
+
+mod --> rejectPage
+mod --> rejectContent
+
+rejectPage --> login
+rejectContent --> login
+
+' Admin
+
+:Administrator: as admin
+note right of admin
+    Administrator can perform all actions of any user
+end note
+
+(View site analytics) as viewAnalytics
+(Promote User to Moderator) as promoteUser
+(Suspend User) as suspendUser
+(Ban User) as banUser
+
+admin --> viewAnalytics
+admin --> promoteUser
+admin --> suspendUser
+admin --> banUser
+
+viewAnalytics --> login
+promoteUser --> login
+suspendUser --> login
+banUser --> login
+
+@enduml

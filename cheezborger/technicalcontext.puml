@@ -1,0 +1,49 @@
+@startuml
+title Technical context
+
+[I Can Haz Cheezborger] as core #eeee99
+
+cloud "External" {
+
+    [YouTube] as youtube
+    () "YouTube API" as youtubeapi
+    youtube -up- youtubeapi
+    [TikTok] as tiktok
+    () "TikTok API" as tiktokapi
+    tiktok -up- tiktokapi
+    [external images] as internet
+    () "HTTP" as http
+    internet -up- http
+
+}
+
+cloud "Internal" {
+    database "Azure storage" as azure {
+        folder "Files" {
+            [Images]
+            [Videos]
+        }
+        database "Usage data"
+        database "User data"
+        database "Page content"
+    }
+    () "Azure API" as azureapi
+    azure -up- azureapi
+
+    component Disqus as disqus {
+        [Forum frames]
+        database "Forum content"
+    }
+    () "Disqus API" as disqusapi
+    
+    disqus -up- disqusapi
+}
+
+core --( youtubeapi
+core --( tiktokapi
+core --( http
+
+core --( azureapi
+core --( disqusapi
+
+@enduml

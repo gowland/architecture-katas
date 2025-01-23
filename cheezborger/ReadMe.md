@@ -6,6 +6,8 @@
 
 My solution to the [I Can Haz Cheezborger kata](https://fundamentalsofsoftwarearchitecture.com/katas/kata?id=Cheezborger).
 
+![Use case diagram](usecases.png)
+
 ## 1.2 Quality Goals
 
 | Quality Attribute | Description |
@@ -36,11 +38,11 @@ My solution to the [I Can Haz Cheezborger kata](https://fundamentalsofsoftwarear
 
 ## 3.1 Business context
 
-see [Use case diagram](file:///C:/Users/53rgowland/OneDrive - Sonova/Training/Architecture katas/Cheezborger/cheezborger.puml)
+![Business context diagram](businesscontext.png)
 
 ## 3.2 Technical Context
 
-see [Use case diagram](file:///C:/Users/53rgowland/OneDrive - Sonova/Training/Architecture katas/Cheezborger/cheezborger.puml)
+![Technical context diagram](technicalcontext.png)
 
 # 4. Solution Strategy
 
