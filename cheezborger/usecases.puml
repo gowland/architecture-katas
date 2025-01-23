@@ -1,5 +1,5 @@
 @startuml
-title I Can Haz Cheezborger Use Cases
+title Use Cases
 left to right direction
 
 package "Users" {
@@ -13,15 +13,13 @@ package "Users" {
 (Log in) as login
 
 package "Readers" {
-    (View meme page) as readPage
-    (Search for meme) as searchPage
+    (View page) as readPage
     (Flag whole page) as flagPage
     (Flag page content element) as flagContent
     (Read forums) as readForums
 }
 
 reader --> readPage
-reader --> searchPage
 reader --> flagPage
 reader --> flagContent
 reader --> readForums
@@ -43,13 +41,15 @@ package "Posters" {
     }
     package "New Content" {
         (Post new content to page) as postContent
-        (Create new meme page) as createPage
+        (Create new sub page) as createPage
         (Inject online image) as image
         postContent --> image
         (Inject TikTok video) as tiktok
         postContent --> tiktok
         (Inject YouTube video) as youtube
         postContent --> youtube
+        (Inject markdown) as markdown
+        postContent --> markdown
     }
     package "Mashup" {
         (Post mashup to page) as createMashupPage
@@ -82,7 +82,7 @@ replyThread --> login
 ' Moderators
 
 note right of mod
-    User Moderator can perform all actions of Poster and User
+    User Moderator can perform all actions of Poster and Reader
 end note
 
 package "Moderators" {
@@ -100,18 +100,22 @@ rejectContent --> login
 
 :Administrator: as admin
 note right of admin
-    Administrator can perform all actions of any user
+    Administrator can perform all actions of any User
 end note
 
+package "Moderation" {
+    (Promote User to Moderator) as promoteUser
+    (Suspend User) as suspendUser
+    (Ban User) as banUser
+}
 (View site analytics) as viewAnalytics
-(Promote User to Moderator) as promoteUser
-(Suspend User) as suspendUser
-(Ban User) as banUser
+(Create new meme site) as createNewSite
 
 admin --> viewAnalytics
 admin --> promoteUser
 admin --> suspendUser
 admin --> banUser
+admin --> createNewSite
 
 viewAnalytics --> login
 promoteUser --> login
