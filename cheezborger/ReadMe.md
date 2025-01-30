@@ -51,7 +51,7 @@ See requirements
 | Quality Goal | Scenario | Solution approach | Link to details |
 |---|---|---|---|
 | 10.2.2 SC6 | Time to market | **Design to discard**. The system will be designed in such a way that subsystems can be swapped out easily, thus allowing the components to be written quickly and replaced with more maintainable and more scalable code over time as needed | |
-| 10.2.2 SC6 | Time to market | **Leverage 3rd party solutions**. We will use Azure hosting for web pages, data, and services. We will use Disqus for the forums' backend. |
+| 10.2.2 SC6 | Time to market | **Leverage 3rd party solutions**. We will use Azure hosting for web pages, data, and services. We will use Disqus for the forums. |
 | 10.2.2 SC4 | Interoperability | **Loose message structure**. Subsystems will not communicate through strict message structures |
 
 # Building Block View
