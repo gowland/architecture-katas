@@ -1,18 +1,23 @@
 @startuml
 title Level 1 Subsystems
 
-component "I Can Haz Cheezborger" as main {
+component "I Can Haz Cheezborger" as core #eeee99 {
 
-    [Site Creation]
-    [User Registration]
-    [Content Editing]
-    [Content Moderation]
-    [Permissions Management]
-    [Mashup Creation]
-    [External Content Capture]
-    [Forums]
-    [Data Harvesting]
-    [Trend Analysis]
+    [Site Creator]
+    [User Registry]
+    [Content Editor]
+    [Content Moderation Editor]
+    [Permissions Editor]
+    [SEO Editor]
+    [Mashup Creator]
+    [External Content Acquirer]
+    [Forums] as forums
+    [Data Harvester]
+    [Trend Analyzer]
 }
+
+component Disqus
+
+forums --> Disqus
 
 @enduml
