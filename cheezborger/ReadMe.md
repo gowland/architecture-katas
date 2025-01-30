@@ -54,7 +54,12 @@ See requirements
 | 10.2.2 SC6 | Time to market | **Leverage 3rd party solutions**. We will use Azure hosting for web pages, data, and services. We will use Disqus for the forums. |
 | 10.2.2 SC4 | Interoperability | **Loose message structure**. Subsystems will not communicate through strict message structures |
 
-# Building Block View
+# 5. Building Block View
+
+## 5.1 Level 1
+
+![Level 1 Breakdown](level1subsystems.png)
+
 # Runtime View
 # Deployment View
 # Crosscutting Concepts
