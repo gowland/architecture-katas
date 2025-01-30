@@ -61,21 +61,18 @@ package "Posters" {
         createMashupPage --> mashupImageVideo
         (Select pages for mashup) as selectPages
     }
-    (Edit page tags) as editTags
 }
 
 poster --> postContent
 poster --> createPage
 poster --> createMashupPage
 createMashupPage --> selectPages
-poster --> editTags
 poster --> startThread
 poster --> replyThread
 
 postContent --> login
 createPage --> login
 createMashupPage --> login
-editTags --> login
 startThread --> login
 replyThread --> login
 
@@ -88,13 +85,16 @@ end note
 package "Moderators" {
     (Reject flagged page) as rejectPage
     (Reject flagged content) as rejectContent
+    (Edit page metadata) as editTags
 }
 
 mod --> rejectPage
 mod --> rejectContent
-
+mod --> editTags
+    
 rejectPage --> login
 rejectContent --> login
+editTags --> login
 
 ' Admin
 
