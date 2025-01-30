@@ -1,7 +1,6 @@
 @startuml
 title Technical context
 
-[I Can Haz Cheezborger] as core #eeee99
 
 cloud "External" {
 
@@ -25,10 +24,14 @@ cloud "Internal" {
         }
         database "Usage data"
         database "User data"
-        database "Page content"
+        database "Hosted page content"
     }
     () "Azure API" as azureapi
     azure -up- azureapi
+    
+    package "Azure services" {
+        [I Can Haz Cheezborger] as core #eeee99
+    }
 
     component Disqus as disqus {
         [Forum frames]
