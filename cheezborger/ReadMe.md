@@ -63,7 +63,7 @@ See requirements
 |Buidling block|Responsibilities|
 |--|--|
 |Site Creator| • Register domain<br> • Create new site in Azure hosting|
-|User Registry| • Register new users<br> • Manage user accounts|
+|User Registry| • Register new user<br> • Delete user account|
 |Content Editor| • Add markdown to page<br> • Add image asset to page<br> • Add video asset to page<br> • Create new subpage<br> • Set metadata for site|
 |Content Moderation Editor| • View flagged content<br> • Reject flag<br> • Approve flag (remove content)|
 |Permissions Editor| • Promote user to moderator<br> • Demote user<br> • Suspend user<br> • Ban user|
