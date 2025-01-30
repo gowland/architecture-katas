@@ -3,21 +3,32 @@ title Level 1 Subsystems
 
 component "I Can Haz Cheezborger" as core #eeee99 {
 
-    [Site Creator]
-    [User Registry]
-    [Content Editor]
-    [Content Moderation Editor]
-    [Permissions Editor]
-    [SEO Editor]
-    [Mashup Creator]
-    [External Content Acquirer]
-    [Forums] as forums
-    [Data Harvester]
-    [Trend Analyzer]
+    [Site Creator] as creator
+    
+    [User Registry] as users
+    
+    [Content Editor] as contentEdit
+    
+    [Content Moderation Editor] as moderator
+    
+    [Permissions Editor] as permission
+    
+    [Mashup Creator] as mashup
+    
+    [External Asset Acquirer] as acquire
+    
+    [Data Harvester] as harvester
+    
+    [Trend Analyzer] as analyzer
 }
 
 component Disqus
+component "Azure Hosted Site" as site
 
-forums --> Disqus
+creator ..> site : edits
+contentEdit ..> site : edits
+moderator ..> site : edits
+harvester ..> site : reads
+site ..> Disqus : use
 
 @enduml
