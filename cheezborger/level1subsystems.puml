@@ -1,0 +1,18 @@
+@startuml
+title Level 1 Subsystems
+
+component "I Can Haz Cheezborger" as main {
+
+    [Site Creation]
+    [User Registration]
+    [Content Editing]
+    [Content Moderation]
+    [Permissions Management]
+    [Mashup Creation]
+    [External Content Capture]
+    [Forums]
+    [Data Harvesting]
+    [Trend Analysis]
+}
+
+@enduml
