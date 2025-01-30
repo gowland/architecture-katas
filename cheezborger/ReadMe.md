@@ -60,6 +60,19 @@ See requirements
 
 ![Level 1 Breakdown](level1subsystems.png)
 
+|Buidling block|Responsibilities|
+|--|--|
+|Site Creator| • Register domain<br> • Create new site in Azure hosting|
+|User Registry| • Register new users<br> • Manage user accounts|
+|Content Editor| • Add markdown to page<br> • Add image asset to page<br> • Add video asset to page<br> • Create new subpage<br> • Set metadata for site|
+|Content Moderation Editor| • View flagged content<br> • Reject flag<br> • Approve flag (remove content)|
+|Permissions Editor| • Promote user to moderator<br> • Demote user<br> • Suspend user<br> • Ban user|
+|Mashup Creator| • Select assets for mashup<br> • Create mashup of image assets<br> • Create mashup of video assets<br> • Create mashup of image and video assets|
+|External Asset Acquirer| • Extract video from 3rd party<br> • Extract image from 3rd party|
+|Data Harvester| • Collect page statistics<br> • Collect user statistics|
+|Trend Analyzer| • Analyze data<br> • Present analysis reports|
+
+
 # Runtime View
 # Deployment View
 # Crosscutting Concepts
