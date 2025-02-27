@@ -1,36 +1,59 @@
 @startuml
 title Level 1 Subsystems
 
-component "I Can Haz Cheezborger" as core #eeee99 {
+'component "I Can Haz Cheezborger" as core #eeee99 {
 
-'    package "Site" as sitePkg {
+    package "Site" as sitePkg {
         [Site Creator] as creator
-        [Content Editor] as contentEdit
         [Content Moderation Editor] as moderator
+    }
+    
+    package "User Management" as userMgmtPkg {
+        [User Registry] as users
+        [Permissions Editor] as permission
+    }
+    
+    package "Content Editing" as contentEditPkg {
+        [Content Editor] as contentEdit
+        [External Asset Acquirer] as acquire
+        [Mashup Creator] as mashup
+    }
+    
+    package "Analytics" as analyticsPkg {
         [Data Harvester] as harvester
-'    }
+        [Trend Analyzer] as analyzer
+    }
     
-    [User Registry] as users
-    
-    [Permissions Editor] as permission
-    
-    [Mashup Creator] as mashup
-    
-    [External Asset Acquirer] as acquire
-    
-    [Trend Analyzer] as analyzer
-}
+'}
 
 component Disqus
-component "Azure Hosted Site" as site
-cloud "Azure Storage" as storage {
-    database "Page usage" as pageUsage
-    database "Users" as userData
+cloud "Azure Storage" as siteStorage {
+    component "Azure Hosted Meme Site" as site
     database "Assets" as assetData
+}
+cloud "Web" as generatedMeme {
+    [Generated Meme Page Content] as generatedContent
+}
+cloud "Azure Storage" as storageAnalytics {
+    database "Page usage" as pageUsage
+}
+cloud "Azure Storage" as storage {
+    database "Users" as userData
+}
+cloud "Azure Storage" as storageMod {
     database "Moderation" as moderationData
+}
+cloud "Azure Storage" as storageAdmin {
+    component "Administration Site" as adminUI
+    [Generated Admin Page Content] as generatedAdmin
 }
 
 acquire ..> assetData : writes
+
+adminUI ..> generatedAdmin : generates
+generatedAdmin ..> creator : uses
+generatedAdmin ..> analyzer : uses
+generatedAdmin ..> permission : uses
 
 analyzer ..> harvester : uses
 analyzer ..> permission : uses
@@ -38,22 +61,27 @@ analyzer ..> permission : uses
 creator ..> site : edits
 
 contentEdit ..> site : edits
-contentEdit ..> assetData : reads
+contentEdit ..> acquire : uses
+contentEdit ..> mashup : uses
+contentEdit ..> permission : uses
 
-harvester ..> site : reads
-harvester ..> pageUsage : writes
+harvester ..> pageUsage : read/write
 
-mashup ..> assetData : read/write
+mashup ..> acquire
 
-moderator ..> site : edits
+moderator ..> contentEdit : edits
 moderator ..> permission : uses
 moderator ..> moderationData : edits
 
-permission ..> userData : edits
+permission ..> userData : read/write
 
-site ..> Disqus : use
-site ..> assetData : read
-site ..> permission : uses
+site ..> generatedContent : generates
+generatedContent ..> contentEdit
+generatedContent ..> assetData : read
+generatedContent ..> harvester : posts
+generatedContent ..> Disqus : use
+generatedContent ..> moderator
+generatedContent ..> users
 
 users ..> userData : read/write
 users ..> permission : uses

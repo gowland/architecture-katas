@@ -46,11 +46,12 @@ My solution to the [I Can Haz Cheezborger kata](https://fundamentalsofsoftwarear
 
 # 4. Solution Strategy
 
-See requirements
+- See [Requirements](https://fundamentalsofsoftwarearchitecture.com/katas/kata?id=Cheezborger)
+- See [Quality Requirements](#10-quality-requirements)
 
-| Quality Goal | Scenario | Solution approach | Link to details |
-|---|---|---|---|
-| 10.2.2 SC6 | Time to market | **Design to discard**. The system will be designed in such a way that subsystems can be swapped out easily, thus allowing the components to be written quickly and replaced with more maintainable and more scalable code over time as needed | |
+| Quality Goal | Scenario | Solution approach |
+|---|---|---|
+| 10.2.2 SC6 | Time to market | **Design to discard**. The system will be designed in such a way that subsystems can be swapped out easily, thus allowing the components to be written quickly and replaced with more maintainable and more scalable code over time as needed |
 | 10.2.2 SC6 | Time to market | **Leverage 3rd party solutions**. We will use Azure hosting for web pages, data, and services. We will use Disqus for the forums. |
 | 10.2.2 SC4 | Interoperability | **Loose message structure**. Subsystems will not communicate through strict message structures |
 
@@ -62,7 +63,7 @@ See requirements
 
 |Buidling block|Responsibilities|
 |--|--|
-|Site Creator| • Register domain<br> • Create new site in Azure hosting|
+|Site Creator| • Register domain<br> • Create new blank site in Azure hosting|
 |User Registry| • Register new user<br> • Delete user account|
 |Content Editor| • Add markdown to page<br> • Add image asset to page<br> • Add video asset to page<br> • Create new subpage<br> • Set metadata for site|
 |Content Moderation Editor| • View flagged content<br> • Reject flag<br> • Approve flag (remove content)|
