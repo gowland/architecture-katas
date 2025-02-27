@@ -1,27 +1,69 @@
 @startuml
 title Level 1 Subsystems
 
+legend
+    |Color|Type|
+    |<#eeee99>|Part of I Can Haz Cheezborger system|
+    |<#lightgrey>|External|
+end legend
+
 'component "I Can Haz Cheezborger" as core #eeee99 {
 
-    package "Site" as sitePkg {
+    package "Site" as sitePkg #eeee99 {
         [Site Creator] as creator
+        () " " as creatorInterface
+        creator -up- creatorInterface
+        
         [Content Moderation Editor] as moderator
+        () " " as moderatorInterface
+        moderator -up- moderatorInterface
     }
     
-    package "User Management" as userMgmtPkg {
+    package "User Management" as userMgmtPkg #eeee99 {
         [User Registry] as users
-        [Permissions Editor] as permission
+        () " " as usersInterface
+        users -up- usersInterface
     }
     
-    package "Content Editing" as contentEditPkg {
+    package "Content Editing" as contentEditPkg #eeee99 {
         [Content Editor] as contentEdit
+        () " " as contentEditInterface
+        contentEdit -up- contentEditInterface
+        
+        [Asset Filer] as assetFiler
+        () " " as assetFilerInterface
+        assetFiler -up- assetFilerInterface
+        
         [External Asset Acquirer] as acquire
+        () " " as acquireInterface
+        acquire -up- acquireInterface
+        
         [Mashup Creator] as mashup
+        () " " as mashupInterface
+        mashup -up- mashupInterface
     }
     
-    package "Analytics" as analyticsPkg {
+    package "Analytics" as analyticsPkg #eeee99 {
         [Data Harvester] as harvester
+        () " " as harvesterInterface
+        harvester -up- harvesterInterface
+        
         [Trend Analyzer] as analyzer
+        () " " as analyzerInterface
+        analyzer -up- analyzerInterface
+    }
+    
+    package "Cross Cutting" as crossCuttingPkg #eeee99 {
+        [Permissions Editor] as permission
+        () " " as permissionInterface
+        permission -up- permissionInterface
+        
+        note top of permission
+            Permissions Editor is used by multiple services
+             to determine whether a user has the right to
+             perform an action. These are no explicitly 
+             called out in the diagram.
+        end note
     }
     
 '}
@@ -48,42 +90,40 @@ cloud "Azure Storage" as storageAdmin {
     [Generated Admin Page Content] as generatedAdmin
 }
 
-acquire ..> assetData : writes
+assetFiler ..> assetData : writes
 
 adminUI ..> generatedAdmin : generates
-generatedAdmin ..> creator : uses
-generatedAdmin ..> analyzer : uses
-generatedAdmin ..> permission : uses
+generatedAdmin --( creatorInterface
+generatedAdmin --( analyzerInterface
 
-analyzer ..> harvester : uses
-analyzer ..> permission : uses
+analyzer --( harvesterInterface
+
+acquire --( assetFilerInterface
 
 creator ..> site : edits
 
 contentEdit ..> site : edits
-contentEdit ..> acquire : uses
-contentEdit ..> mashup : uses
-contentEdit ..> permission : uses
+contentEdit --( acquireInterface
+contentEdit --( mashupInterface
 
 harvester ..> pageUsage : read/write
 
-mashup ..> acquire
+mashup --( acquireInterface
+mashup --( assetFilerInterface
 
-moderator ..> contentEdit : edits
-moderator ..> permission : uses
+moderator --( contentEditInterface
 moderator ..> moderationData : edits
 
 permission ..> userData : read/write
 
 site ..> generatedContent : generates
-generatedContent ..> contentEdit
+generatedContent --( contentEditInterface
 generatedContent ..> assetData : read
-generatedContent ..> harvester : posts
+generatedContent --( harvesterInterface
 generatedContent ..> Disqus : use
-generatedContent ..> moderator
-generatedContent ..> users
-
+generatedContent --( moderatorInterface
+generatedContent --( usersInterface
 users ..> userData : read/write
-users ..> permission : uses
+users --( permissionInterface
 
 @enduml
